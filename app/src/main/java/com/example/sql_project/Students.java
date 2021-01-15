@@ -4,6 +4,7 @@ public class Students {
     public static final String TABLE_STUDENTS= "Students";
     public static final String NAME="Name";
     public static final String KEY_ID = "_id";
+    public static final String ACTIVE="Active";
     public static final String ADDRESS="Address";
     public static final String PHONE_NUMBER="Phone_Number";
     public static final String HOME_PHONE_NUMBER="Home_Phone_Number";

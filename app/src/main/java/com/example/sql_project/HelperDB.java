@@ -10,6 +10,7 @@ import static com.example.sql_project.Grades.CLASS;
 import static com.example.sql_project.Grades.GRADE;
 import static com.example.sql_project.Grades.QUARTER_NUM;
 import static com.example.sql_project.Grades.TABLE_GRADES;
+import static com.example.sql_project.Students.ACTIVE;
 import static com.example.sql_project.Students.ADDRESS;
 import static com.example.sql_project.Students.HOME_PHONE_NUMBER;
 import static com.example.sql_project.Students.KEY_ID;
@@ -36,13 +37,14 @@ public class HelperDB extends SQLiteOpenHelper {
         strCreate="CREATE TABLE "+TABLE_STUDENTS;
         strCreate+=" ("+KEY_ID+" INTEGER PRIMARY KEY,";
         strCreate+=" "+NAME+" TEXT,";
-        strCreate+=" "+ADDRESS+" TEXT,";
-        strCreate+=" "+PARENT1_NAME+" TEXT,";
-        strCreate+=" "+PARENT2_NAME+" TEXT,";
         strCreate+=" "+PHONE_NUMBER+" INTEGER,";
+        strCreate+=" "+ADDRESS+" TEXT,";
         strCreate+=" "+HOME_PHONE_NUMBER+" INTEGER,";
+        strCreate+=" "+PARENT1_NAME+" TEXT,";
         strCreate+=" "+P1_NUM+" INTEGER,";
-        strCreate+=" "+P2_NUM+" INTEGER";
+        strCreate+=" "+PARENT2_NAME+" TEXT,";
+        strCreate+=" "+P2_NUM+" INTEGER,";
+        strCreate+=" "+ACTIVE+" INTEGER";
         strCreate+=");";
         db.execSQL(strCreate);
 
