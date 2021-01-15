@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             cv.put(Students.PARENT2_NAME,sP2);
             cv.put(Students.P1_NUM,iP1_Phone);
             cv.put(Students.P2_NUM,iP2_Phone);
-            cv.put(Students.ACTIVE,1);
+            cv.put(Students.ACTIVE,0);
 
             db = hlp.getWritableDatabase();
 
