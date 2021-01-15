@@ -16,7 +16,8 @@ import static com.example.sql_project.Students.KEY_ID;
 import static com.example.sql_project.Students.NAME;
 import static com.example.sql_project.Students.P1_NUM;
 import static com.example.sql_project.Students.P2_NUM;
-import static com.example.sql_project.Students.PARENTS_NAME;
+import static com.example.sql_project.Students.PARENT1_NAME;
+import static com.example.sql_project.Students.PARENT2_NAME;
 import static com.example.sql_project.Students.PHONE_NUMBER;
 import static com.example.sql_project.Students.TABLE_STUDENTS;
 
@@ -36,7 +37,8 @@ public class HelperDB extends SQLiteOpenHelper {
         strCreate+=" ("+KEY_ID+" INTEGER PRIMARY KEY,";
         strCreate+=" "+NAME+" TEXT,";
         strCreate+=" "+ADDRESS+" TEXT,";
-        strCreate+=" "+PARENTS_NAME+" TEXT,";
+        strCreate+=" "+PARENT1_NAME+" TEXT,";
+        strCreate+=" "+PARENT2_NAME+" TEXT,";
         strCreate+=" "+PHONE_NUMBER+" INTEGER,";
         strCreate+=" "+HOME_PHONE_NUMBER+" INTEGER,";
         strCreate+=" "+P1_NUM+" INTEGER,";

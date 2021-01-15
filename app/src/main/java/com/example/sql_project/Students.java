@@ -7,7 +7,8 @@ public class Students {
     public static final String ADDRESS="Address";
     public static final String PHONE_NUMBER="Phone_Number";
     public static final String HOME_PHONE_NUMBER="Home_Phone_Number";
-    public static final String PARENTS_NAME="Parents_Name";
+    public static final String PARENT1_NAME="Parent1_Name";
+    public static final String PARENT2_NAME="Parent2_Name";
     public static final String P1_NUM="P1_Number";
     public static final String P2_NUM="P2_Number";
 
