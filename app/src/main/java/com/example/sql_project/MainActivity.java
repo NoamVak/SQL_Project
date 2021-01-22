@@ -67,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
             db.insert(Students.TABLE_STUDENTS, null, cv);
 
             db.close();
+
+            student.setText("");
+            s_Phone.setText("");
+            address.setText("");
+            h_Phone.setText("");
+            p1.setText("");
+            p2.setText("");
+            p1_Phone.setText("");
+            p2_Phone.setText("");
         }
 
     }
