@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/quart"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10" />
@@ -41,13 +41,13 @@
                 android:layout_weight="15" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/classN"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="class"
+                android:inputType="textPersonName" />
 
             <Space
                 android:layout_width="match_parent"
@@ -55,10 +55,10 @@
                 android:layout_weight="50" />
 
             <Button
-                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="15"
+                android:onClick="Submit"
                 android:text="SUBMIT" />
         </LinearLayout>
 
@@ -74,7 +74,7 @@
             android:orientation="vertical">
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/nameId"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10" />
@@ -85,13 +85,13 @@
                 android:layout_weight="15" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName1"
+                android:id="@+id/gradeN"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="grade"
+                android:inputType="number" />
 
             <Space
                 android:layout_width="match_parent"
