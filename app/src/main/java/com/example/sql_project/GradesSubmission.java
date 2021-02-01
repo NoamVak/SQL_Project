@@ -2,6 +2,7 @@ package com.example.sql_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,7 +31,8 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
     EditText classN,gradeN;
     ArrayAdapter<String> adp1,adp2;
     String [] qArray={"","1","2","3","4"};
-    int S_Id;
+    int s_row,q_row,grade;
+    String className;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
         gradeN=(EditText)findViewById(R.id.gradeN);
 
         hlp = new HelperDB(this);
-        db = hlp.getWritableDatabase();
+        db = hlp.getReadableDatabase();
 
         quart.setOnItemSelectedListener(this);
         nameId.setOnItemSelectedListener(this);
@@ -104,10 +106,12 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         Spinner s1=(Spinner)parent;
         Spinner s2=(Spinner)parent;
-
-
-
-
+        if(s1.getId()==quart.getId()){
+            q_row=pos;
+        }
+        else if(s2.getId()==nameId.getId()){
+            s_row=pos;
+        }
     }
 
     @Override
@@ -116,10 +120,27 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
     }
 
     public void Submit(View view) {
-        if(classN.getText().toString().equals("")){
-            Toast.makeText(this,"Class Name missing!",Toast.LENGTH_SHORT).show();
+        if(classN.getText().toString().equals("") || gradeN.getText().toString().equals("") || q_row==0 || s_row==0){
+            Toast.makeText(this,"fill the missing areas",Toast.LENGTH_SHORT).show();
         }
         else{
+            grade=Integer.parseInt(gradeN.getText().toString());
+            className = classN.getText().toString();
+
+            ContentValues cv = new ContentValues();
+            cv.put(Grades.KEY_ID,s_row);
+            cv.put(Grades.CLASS,className);
+            cv.put(Grades.GRADE,grade);
+            cv.put(Grades.QUARTER_NUM,q_row);
+
+            db = hlp.getWritableDatabase();
+
+            db.insert(Grades.TABLE_GRADES, null, cv);
+
+            db.close();
+
+            classN.setText("");
+            gradeN.setText("");
 
 
         }
