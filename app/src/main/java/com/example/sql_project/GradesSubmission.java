@@ -102,6 +102,11 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        Spinner s1=(Spinner)parent;
+        Spinner s2=(Spinner)parent;
+
+
+
 
     }
 
