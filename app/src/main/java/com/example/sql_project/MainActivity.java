@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
             Intent in = new Intent(this, Credits.class);
             startActivity(in);
         }
+        if(st.equals("Sort Students")) {
+            Intent in = new Intent(this, SortStudents.class);
+            startActivity(in);
+        }
         if(st.equals("Student Insertion")) {
             return false;
         }
