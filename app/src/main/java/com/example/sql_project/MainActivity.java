@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     HelperDB hlp;
     EditText student,s_Phone,address,h_Phone,p1,p1_Phone,p2,p2_Phone;
-    String sStudent,sAddress,sP1,sP2;
-    int iS_Phone,iH_Phone,iP1_Phone,iP2_Phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,29 +64,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Submit(View view) {
-        if(student.getText().toString().equals(""))
-            Toast.makeText(this,"Student Name missing!",Toast.LENGTH_SHORT).show();
+        if(student.getText().toString().equals("") || s_Phone.getText().toString().equals(""))
+            Toast.makeText(this,"Name or Phone number are missing",Toast.LENGTH_SHORT).show();
         else{
-            sStudent=student.getText().toString();
-            sAddress=address.getText().toString();
-            sP1=p1.getText().toString();
-            sP2=p2.getText().toString();
-            iS_Phone=Integer.parseInt(s_Phone.getText().toString());
-            iH_Phone=Integer.parseInt(h_Phone.getText().toString());
-            iP1_Phone=Integer.parseInt(p1_Phone.getText().toString());
-            iP2_Phone=Integer.parseInt(p2_Phone.getText().toString());
-
 
             ContentValues cv = new ContentValues();
 
-            cv.put(Students.NAME,sStudent);
-            cv.put(Students.PHONE_NUMBER,iS_Phone);
-            cv.put(Students.ADDRESS,sAddress);
-            cv.put(Students.HOME_PHONE_NUMBER,iH_Phone);
-            cv.put(Students.PARENT1_NAME,sP1);
-            cv.put(Students.PARENT2_NAME,sP2);
-            cv.put(Students.P1_NUM,iP1_Phone);
-            cv.put(Students.P2_NUM,iP2_Phone);
+            cv.put(Students.NAME,student.getText().toString());
+            cv.put(Students.PHONE_NUMBER,Integer.parseInt(s_Phone.getText().toString()));
+            cv.put(Students.ADDRESS,address.getText().toString());
+            cv.put(Students.HOME_PHONE_NUMBER,Integer.parseInt(h_Phone.getText().toString()));
+            cv.put(Students.PARENT1_NAME,p1.getText().toString());
+            cv.put(Students.PARENT2_NAME,p2.getText().toString());
+            cv.put(Students.P1_NUM,Integer.parseInt(p1_Phone.getText().toString()));
+            cv.put(Students.P2_NUM,Integer.parseInt(p2_Phone.getText().toString()));
             cv.put(Students.ACTIVE,0);
 
             db = hlp.getWritableDatabase();

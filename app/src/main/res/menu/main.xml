@@ -9,6 +9,11 @@
         android:id="@+id/viewStudents"
         android:title="View Students"
         android:orderInCategory="200"/>
+    <item
+        android:id="@+id/StudentSort"
+        android:title="Sort Students"
+        android:orderInCategory="250"/>
+
 
     <item
         android:id="@+id/menuStudents"
