@@ -95,6 +95,10 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
             Intent in = new Intent(this, ViewStudents.class);
             startActivity(in);
         }
+        if(st.equals("Sort Students")) {
+            Intent in = new Intent(this, SortStudents.class);
+            startActivity(in);
+        }
         if(st.equals("Credits")) {
             Intent in = new Intent(this, Credits.class);
             startActivity(in);
