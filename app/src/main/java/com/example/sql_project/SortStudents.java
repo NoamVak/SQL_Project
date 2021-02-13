@@ -78,7 +78,8 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
         while (!crsr.isAfterLast()){
             String subj = crsr.getString(col1);
             String tmp =subj;
-            classes.add(tmp);
+            if(!classes.contains(tmp))
+                classes.add(tmp);
             crsr.moveToNext();
         }
         crsr.close();
@@ -155,6 +156,11 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
                 crsr.close();
                 db.close();
             }
+            else if(row==2){
+                
+
+            }
+
         }
     }
 
