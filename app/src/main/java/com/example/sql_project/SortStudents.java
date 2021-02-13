@@ -35,6 +35,7 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
     int row;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +140,7 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
             }
         } else if (s2.getId() == filter2.getId()) {
             if (row == 1) {
+                viewInfo.setText("");
                 nameLoc = names.get(pos);
                 String[] columns = {Grades.CLASS, Grades.GRADE};
                 String selection = Grades.KEY_ID + "=?";
@@ -159,6 +161,7 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
             }
 
             else if (row == 2) {
+                viewInfo.setText("");
                 String[] columns = {Grades.KEY_ID, Grades.CLASS, Grades.GRADE};
                 String selection= Grades.CLASS+"=?";
                 String[] selectionArgs= {classes.get(pos)};
@@ -181,6 +184,7 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
             }
 
             else if (row == 3) {
+                viewInfo.setText("");
                 String[] columns = {Grades.KEY_ID, Grades.CLASS, Grades.GRADE};
                 String selection= Grades.CLASS+"=?";
                 String[] selectionArgs= {classes.get(pos)};
