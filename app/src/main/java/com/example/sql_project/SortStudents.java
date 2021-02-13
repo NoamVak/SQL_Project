@@ -29,7 +29,9 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
     ArrayAdapter<String> adp1,adp2;
     ArrayList<String> names= new ArrayList<>();
     ArrayList<String> classes= new ArrayList<>();
+    ArrayList<String> fillIn=new ArrayList<>();
     String[] arrFilter={"filter","All the grades of one student","grades in one subject","all students grades in one subject /up"};
+    String nameLoc;
     int row;
 
     @Override
@@ -67,6 +69,7 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
         crsr.close();
         db.close();
 
+        db = hlp.getReadableDatabase();
         String[] columns1 = {Grades.CLASS};
 
         crsr = db.query(TABLE_GRADES, columns1, null, null, null, null, null);
@@ -118,6 +121,7 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
         Spinner s2=(Spinner)parent;
         db = hlp.getReadableDatabase();
         if(s1.getId()==filter1.getId()){
+            row=pos;
             if(pos==0)
                 filter2.setAdapter(null);
             else if(pos==1){
@@ -132,9 +136,27 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
             }
         }
         else if(s2.getId()==filter2.getId()){
+            if(row==1){
+                nameLoc= names.get(pos);
+                String[] columns = {Grades.CLASS,Grades.GRADE};
+                String selection=  Grades.KEY_ID+"=?";
+                String [] selectionArgs= {String.valueOf(pos)};
+
+                crsr = db.query(TABLE_GRADES, columns, selection, selectionArgs, null, null, null);
+                int col1 = crsr.getColumnIndex(Grades.CLASS);
+                int col2= crsr.getColumnIndex(Grades.GRADE);
+                crsr.moveToFirst();
+                while (!crsr.isAfterLast()){
+                    String subj = crsr.getString(col1);
+                    int grade= crsr.getInt(col2);
+                    viewInfo.append(subj+" - "+grade+"\n");
+                    crsr.moveToNext();
+                }
+                crsr.close();
+                db.close();
+            }
 
         }
-
     }
 
     @Override

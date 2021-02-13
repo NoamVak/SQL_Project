@@ -124,7 +124,7 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
     }
 
     public void Submit(View view) {
-        if(classN.getText().toString().equals("") || gradeN.getText().toString().equals("") || q_row==0 || s_row==0){
+        if(classN.getText().toString().equals("") || gradeN.getText().toString().equals("") || q_row==0){
             Toast.makeText(this,"fill the missing areas",Toast.LENGTH_SHORT).show();
         }
         else{

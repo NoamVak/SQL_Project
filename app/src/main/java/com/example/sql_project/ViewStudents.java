@@ -111,12 +111,12 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        pos=position;
+        pos=position+1;
 
         db = hlp.getReadableDatabase();
 
         String[] columns = {Students.NAME,Students.PHONE_NUMBER,Students.ADDRESS,Students.HOME_PHONE_NUMBER,Students.PARENT1_NAME,Students.P1_NUM,Students.PARENT2_NAME,Students.P2_NUM};
-        String selection=  Students.KEY_ID;
+        String selection=  Students.KEY_ID+"=?";
         String [] selectionArgs= {String.valueOf(pos)};
 
         crsr = db.query(TABLE_STUDENTS, columns, selection, selectionArgs, null, null, null);
@@ -145,13 +145,13 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
         db.close();
 
         student.setText(name);
-        s_Phone.setText(""+ phone);
+        s_Phone.setText(String.valueOf(phone));
         address.setText(addr);
-        h_Phone.setText(""+ h_phoneNum);
+        h_Phone.setText(String.valueOf(h_phoneNum));
         p1.setText(p1_name);
-        p1_Phone.setText(""+p1_num);
+        p1_Phone.setText(String.valueOf(p1_num));
         p2.setText(p2_name);
-        p2_Phone.setText(""+p2_num);
+        p2_Phone.setText(String.valueOf(p2_num));
     }
 
     public void update(View view) {
