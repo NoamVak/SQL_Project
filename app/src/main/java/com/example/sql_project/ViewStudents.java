@@ -204,5 +204,6 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void delete(View view) {
+
     }
 }
