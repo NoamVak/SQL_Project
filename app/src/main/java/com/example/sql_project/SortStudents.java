@@ -3,21 +3,89 @@ package com.example.sql_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-public class SortStudents extends AppCompatActivity {
+import java.util.ArrayList;
+
+import static com.example.sql_project.Grades.TABLE_GRADES;
+import static com.example.sql_project.Students.TABLE_STUDENTS;
+
+public class SortStudents extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    SQLiteDatabase db;
+    HelperDB hlp;
+    Cursor crsr;
+
+    Spinner filter1,filter2;
+    TextView viewInfo;
+    ArrayAdapter<String> adp1,adp2;
+    ArrayList<String> names= new ArrayList<>();
+    ArrayList<String> classes= new ArrayList<>();
+    String[] arrFilter={"filter","All the grades of one student","grades in one subject","all students grades in one subject /up"};
+    int row;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort_students);
+
+        filter1=(Spinner)findViewById(R.id.filter1);
+        filter2=(Spinner)findViewById(R.id.filter2);
+        viewInfo=(TextView)findViewById(R.id.viewInfo);
+
+        hlp = new HelperDB(this);
+        db = hlp.getReadableDatabase();
+
+        filter1.setOnItemSelectedListener(this);
+        filter2.setOnItemSelectedListener(this);
+
+        adp1 = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,arrFilter);
+        filter1.setAdapter(adp1);
+
+        filter2.setAdapter(null);
+
+        String[] columns = {Students.NAME};
+
+        crsr = db.query(TABLE_STUDENTS, columns, null, null, null, null, null);
+        int col1 = crsr.getColumnIndex(Students.NAME);
+        crsr.moveToFirst();
+        while (!crsr.isAfterLast()){
+            String name = crsr.getString(col1);
+            String tmp =name;
+            names.add(tmp);
+            crsr.moveToNext();
+        }
+        crsr.close();
+        db.close();
+
+        String[] columns1 = {Grades.CLASS};
+
+        crsr = db.query(TABLE_GRADES, columns1, null, null, null, null, null);
+        col1 = crsr.getColumnIndex(Grades.CLASS);
+        crsr.moveToFirst();
+        while (!crsr.isAfterLast()){
+            String subj = crsr.getString(col1);
+            String tmp =subj;
+            classes.add(tmp);
+            crsr.moveToNext();
+        }
+        crsr.close();
+        db.close();
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -42,5 +110,35 @@ public class SortStudents extends AppCompatActivity {
             startActivity(in);
         }
         return true;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        Spinner s1=(Spinner)parent;
+        Spinner s2=(Spinner)parent;
+        db = hlp.getReadableDatabase();
+        if(s1.getId()==filter1.getId()){
+            if(pos==0)
+                filter2.setAdapter(null);
+            else if(pos==1){
+                adp2 = new ArrayAdapter<String>(this,
+                        R.layout.support_simple_spinner_dropdown_item,names);
+                filter2.setAdapter(adp2);
+            }
+            else if(pos==2 || pos==3){
+                adp2 = new ArrayAdapter<String>(this,
+                        R.layout.support_simple_spinner_dropdown_item,classes);
+                filter2.setAdapter(adp2);
+            }
+        }
+        else if(s2.getId()==filter2.getId()){
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

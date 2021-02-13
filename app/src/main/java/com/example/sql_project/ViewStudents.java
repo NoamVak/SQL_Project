@@ -2,6 +2,7 @@ package com.example.sql_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,10 +26,11 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
 
     ArrayAdapter<String> adp;
     ArrayList<String> names = new ArrayList<>();
-    ArrayList<String> info= new ArrayList<>();
+    String name,addr,p1_name,p2_name;
+    int pos,phone,h_phoneNum,p1_num,p2_num;
     ListView stuView;
     EditText student,s_Phone,address,h_Phone,p1,p1_Phone,p2,p2_Phone;
-    int pos;
+
 
 
     @Override
@@ -119,34 +121,88 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
 
         crsr = db.query(TABLE_STUDENTS, columns, selection, selectionArgs, null, null, null);
         int col1 = crsr.getColumnIndex(Students.NAME);
+        int col2= crsr.getColumnIndex(Students.PHONE_NUMBER);
+        int col3= crsr.getColumnIndex(Students.ADDRESS);
+        int col4= crsr.getColumnIndex(Students.HOME_PHONE_NUMBER);
+        int col5= crsr.getColumnIndex(Students.PARENT1_NAME);
+        int col6= crsr.getColumnIndex(Students.P1_NUM);
+        int col7= crsr.getColumnIndex(Students.PARENT2_NAME);
+        int col8= crsr.getColumnIndex(Students.P2_NUM);
+
         crsr.moveToFirst();
         while (!crsr.isAfterLast()){
-            String info = crsr.getString(col1);
-            String tmp =info;
-            names.add(tmp);
+            name= crsr.getString(col1);
+            phone= crsr.getInt(col2);
+            addr= crsr.getString(col3);
+            h_phoneNum= crsr.getInt(col4);
+            p1_name= crsr.getString(col5);
+            p1_num= crsr.getInt(col6);
+            p2_name= crsr.getString(col7);
+            p2_num= crsr.getInt(col8);
             crsr.moveToNext();
         }
         crsr.close();
         db.close();
 
-        adp= new ArrayAdapter<String>(this,
-                R.layout.support_simple_spinner_dropdown_item, info);
-        stuView.setAdapter(adp);
-
-
-
+        student.setText(name);
+        s_Phone.setText(""+ phone);
+        address.setText(addr);
+        h_Phone.setText(""+ h_phoneNum);
+        p1.setText(p1_name);
+        p1_Phone.setText(""+p1_num);
+        p2.setText(p2_name);
+        p2_Phone.setText(""+p2_num);
     }
 
     public void update(View view) {
+        ContentValues cv = new ContentValues();
+        db = hlp.getWritableDatabase();
+        if(!name.equals(student.toString())){
+           cv.put(Students.NAME, student.toString());
+           db.update(TABLE_STUDENTS,cv,Students.NAME+"=?", new String[]{name});
+           db.close();
+        }
+        else if(phone != Integer.parseInt(s_Phone.toString())){
+            cv.put(Students.PHONE_NUMBER, Integer.parseInt(s_Phone.toString()));
+            db.update(TABLE_STUDENTS,cv,Students.PHONE_NUMBER+"=?", new String[]{String.valueOf(phone)});
+            db.close();
+        }
+        else if(!addr.equals(address.toString())){
+            cv.put(Students.ADDRESS, address.toString());
+            db.update(TABLE_STUDENTS,cv,Students.ADDRESS+"=?", new String[]{addr});
+            db.close();
+        }
+        else if(h_phoneNum != Integer.parseInt(h_Phone.toString())){
+            cv.put(Students.HOME_PHONE_NUMBER, Integer.parseInt(h_Phone.toString()));
+            db.update(TABLE_STUDENTS,cv,Students.HOME_PHONE_NUMBER+"=?", new String[]{String.valueOf(h_phoneNum)});
+            db.close();
+        }
+        else if(!p1_name.equals(p1.toString())){
+            cv.put(Students.PARENT1_NAME, p1.toString());
+            db.update(TABLE_STUDENTS,cv,Students.PARENT1_NAME+"=?", new String[]{p1_name});
+            db.close();
+        }
+        else if(p1_num != Integer.parseInt(p1_Phone.toString())){
+            cv.put(Students.P1_NUM, Integer.parseInt(p1_Phone.toString()));
+            db.update(TABLE_STUDENTS,cv,Students.P1_NUM+"=?", new String[]{String.valueOf(p1_num)});
+            db.close();
+        }
+        else if(!p2_name.equals(p2.toString())){
+            cv.put(Students.PARENT2_NAME, p2.toString());
+            db.update(TABLE_STUDENTS,cv,Students.PARENT2_NAME+"=?", new String[]{p2_name});
+            db.close();
+        }
+        else if(p2_num != Integer.parseInt(p2_Phone.toString())){
+            cv.put(Students.P2_NUM, Integer.parseInt(p2_Phone.toString()));
+            db.update(TABLE_STUDENTS,cv,Students.P2_NUM+"=?", new String[]{String.valueOf(p2_num)});
+            db.close();
+        }
+        else{
 
-
+        }
 
     }
 
-    public void ret_nameList(View view) {
-        pos=-1;
-        adp= new ArrayAdapter<String>(this,
-                R.layout.support_simple_spinner_dropdown_item, names);
-        stuView.setAdapter(adp);
+    public void delete(View view) {
     }
 }

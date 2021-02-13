@@ -19,7 +19,7 @@
         android:orientation="horizontal">
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/filter1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="45" />
@@ -30,7 +30,7 @@
             android:layout_weight="10" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/filter2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="45" />
@@ -57,7 +57,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/viewInfo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center" />

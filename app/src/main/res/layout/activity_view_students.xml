@@ -32,21 +32,7 @@
             <ListView
                 android:id="@+id/stuView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="85"></ListView>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"/>
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10"
-                android:onClick="ret_nameList"
-                android:text="show S_list" />
+                android:layout_height="match_parent"></ListView>
 
         </LinearLayout>
 
@@ -189,6 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
+                android:onClick="delete"
                 android:text="delete student" />
 
         </LinearLayout>
