@@ -155,7 +155,6 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
                 crsr.close();
                 db.close();
             }
-
         }
     }
 
