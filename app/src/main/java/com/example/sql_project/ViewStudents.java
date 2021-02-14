@@ -167,7 +167,7 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
     public void update(View view) {
 
         if(pos<1){
-            Toast.makeText(this,"HAHAHA YOU FOOL YOU THOUGHT YOU CAN TRICK ME",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"HAHAHA YOU FOOL YOU THOUGHT YOU CAN TRICK ME",Toast.LENGTH_LONG).show();
         }
         else{
             ContentValues cv= new ContentValues();
