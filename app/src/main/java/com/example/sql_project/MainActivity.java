@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             cv.put(Students.PARENT2_NAME,p2.getText().toString());
             cv.put(Students.P1_NUM,Integer.parseInt(p1_Phone.getText().toString()));
             cv.put(Students.P2_NUM,Integer.parseInt(p2_Phone.getText().toString()));
-            cv.put(Students.ACTIVE,0);
+            cv.put(Students.ACTIVE,1);
 
             db = hlp.getWritableDatabase();
 

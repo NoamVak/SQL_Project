@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -27,10 +29,10 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
     ArrayAdapter<String> adp;
     ArrayList<String> names = new ArrayList<>();
     String name,addr,p1_name,p2_name;
-    int pos,phone,h_phoneNum,p1_num,p2_num;
+    int pos,phone,h_phoneNum,p1_num,p2_num,active;
     ListView stuView;
     EditText student,s_Phone,address,h_Phone,p1,p1_Phone,p2,p2_Phone;
-
+    ToggleButton state;
 
 
     @Override
@@ -47,6 +49,7 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
         p1_Phone=(EditText)findViewById(R.id.p1_Phone);
         p2=(EditText)findViewById(R.id.p2);
         p2_Phone=(EditText)findViewById(R.id.p2_Phone);
+        state=(ToggleButton)findViewById(R.id.state);
 
         hlp = new HelperDB(this);
         db = hlp.getReadableDatabase();
@@ -115,7 +118,7 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
 
         db = hlp.getReadableDatabase();
 
-        String[] columns = {Students.NAME,Students.PHONE_NUMBER,Students.ADDRESS,Students.HOME_PHONE_NUMBER,Students.PARENT1_NAME,Students.P1_NUM,Students.PARENT2_NAME,Students.P2_NUM};
+        String[] columns = {Students.NAME,Students.PHONE_NUMBER,Students.ADDRESS,Students.HOME_PHONE_NUMBER,Students.PARENT1_NAME,Students.P1_NUM,Students.PARENT2_NAME,Students.P2_NUM,Students.ACTIVE};
         String selection=  Students.KEY_ID+"=?";
         String [] selectionArgs= {String.valueOf(pos)};
 
@@ -128,6 +131,7 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
         int col6= crsr.getColumnIndex(Students.P1_NUM);
         int col7= crsr.getColumnIndex(Students.PARENT2_NAME);
         int col8= crsr.getColumnIndex(Students.P2_NUM);
+        int col9= crsr.getColumnIndex(Students.ACTIVE);
 
         crsr.moveToFirst();
         while (!crsr.isAfterLast()){
@@ -139,6 +143,7 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
             p1_num= crsr.getInt(col6);
             p2_name= crsr.getString(col7);
             p2_num= crsr.getInt(col8);
+            active= crsr.getInt(col9);
             crsr.moveToNext();
         }
         crsr.close();
@@ -152,58 +157,17 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
         p1_Phone.setText(String.valueOf(p1_num));
         p2.setText(p2_name);
         p2_Phone.setText(String.valueOf(p2_num));
+        if(active==1)
+            state.setChecked(true);
+        else state.setChecked(false);
     }
 
     public void update(View view) {
-        ContentValues cv = new ContentValues();
-        db = hlp.getWritableDatabase();
-        if(!name.equals(student.toString())){
-           cv.put(Students.NAME, student.toString());
-           db.update(TABLE_STUDENTS,cv,Students.NAME+"=?", new String[]{name});
-           db.close();
-        }
-        else if(phone != Integer.parseInt(s_Phone.toString())){
-            cv.put(Students.PHONE_NUMBER, Integer.parseInt(s_Phone.toString()));
-            db.update(TABLE_STUDENTS,cv,Students.PHONE_NUMBER+"=?", new String[]{String.valueOf(phone)});
-            db.close();
-        }
-        else if(!addr.equals(address.toString())){
-            cv.put(Students.ADDRESS, address.toString());
-            db.update(TABLE_STUDENTS,cv,Students.ADDRESS+"=?", new String[]{addr});
-            db.close();
-        }
-        else if(h_phoneNum != Integer.parseInt(h_Phone.toString())){
-            cv.put(Students.HOME_PHONE_NUMBER, Integer.parseInt(h_Phone.toString()));
-            db.update(TABLE_STUDENTS,cv,Students.HOME_PHONE_NUMBER+"=?", new String[]{String.valueOf(h_phoneNum)});
-            db.close();
-        }
-        else if(!p1_name.equals(p1.toString())){
-            cv.put(Students.PARENT1_NAME, p1.toString());
-            db.update(TABLE_STUDENTS,cv,Students.PARENT1_NAME+"=?", new String[]{p1_name});
-            db.close();
-        }
-        else if(p1_num != Integer.parseInt(p1_Phone.toString())){
-            cv.put(Students.P1_NUM, Integer.parseInt(p1_Phone.toString()));
-            db.update(TABLE_STUDENTS,cv,Students.P1_NUM+"=?", new String[]{String.valueOf(p1_num)});
-            db.close();
-        }
-        else if(!p2_name.equals(p2.toString())){
-            cv.put(Students.PARENT2_NAME, p2.toString());
-            db.update(TABLE_STUDENTS,cv,Students.PARENT2_NAME+"=?", new String[]{p2_name});
-            db.close();
-        }
-        else if(p2_num != Integer.parseInt(p2_Phone.toString())){
-            cv.put(Students.P2_NUM, Integer.parseInt(p2_Phone.toString()));
-            db.update(TABLE_STUDENTS,cv,Students.P2_NUM+"=?", new String[]{String.valueOf(p2_num)});
-            db.close();
-        }
-        else{
 
-        }
 
     }
 
     public void delete(View view) {
-
+        state.setChecked(false);
     }
 }

@@ -158,6 +158,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp" />
 
+                    <ToggleButton
+                        android:id="@+id/state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ToggleButton"
+                        android:textOff="not active"
+                        android:textOn="active" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" />
+
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
