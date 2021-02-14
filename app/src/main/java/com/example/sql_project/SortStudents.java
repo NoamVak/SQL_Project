@@ -125,14 +125,17 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
         db = hlp.getReadableDatabase();
         if (s1.getId() == filter1.getId()) {
             row = pos;
-            if (pos == 0)
+            if (pos == 0) {
                 filter2.setAdapter(null);
+                viewInfo.setText("");
+            }
             else if (pos == 1) {
                 adp2 = new ArrayAdapter<String>(this,
                         R.layout.support_simple_spinner_dropdown_item, names);
                 filter2.setAdapter(adp2);
                 viewInfo.setText("");
-            } else if (pos == 2 || pos == 3) {
+            }
+            else if (pos == 2 || pos == 3) {
                 adp2 = new ArrayAdapter<String>(this,
                         R.layout.support_simple_spinner_dropdown_item, classes);
                 filter2.setAdapter(adp2);
