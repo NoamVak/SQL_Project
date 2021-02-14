@@ -213,6 +213,7 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+        viewInfo.setText("");
 
     }
 }
