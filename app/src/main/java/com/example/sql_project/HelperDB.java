@@ -24,7 +24,7 @@ import static com.example.sql_project.Students.TABLE_STUDENTS;
 
 public class HelperDB extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "dbexam.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
     String strCreate, strDelete;
     public HelperDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -43,7 +43,8 @@ public class HelperDB extends SQLiteOpenHelper {
         strCreate+=" "+PARENT1_NAME+" TEXT,";
         strCreate+=" "+P1_NUM+" INTEGER,";
         strCreate+=" "+PARENT2_NAME+" TEXT,";
-        strCreate+=" "+P2_NUM+" INTEGER";
+        strCreate+=" "+P2_NUM+" INTEGER,";
+        strCreate+=" "+ACTIVE+" INTEGER";
         strCreate+=");";
         db.execSQL(strCreate);
 

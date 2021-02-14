@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     HelperDB hlp;
     EditText student,s_Phone,address,h_Phone,p1,p1_Phone,p2,p2_Phone;
+    int active=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             cv.put(Students.PARENT2_NAME,p2.getText().toString());
             cv.put(Students.P1_NUM,Integer.parseInt(p1_Phone.getText().toString()));
             cv.put(Students.P2_NUM,Integer.parseInt(p2_Phone.getText().toString()));
-            cv.put(Students.ACTIVE,1);
+            cv.put(Students.ACTIVE,active);
 
             db = hlp.getWritableDatabase();
 

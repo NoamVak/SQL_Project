@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.KeyboardShortcutGroup;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
+import static com.example.sql_project.Students.KEY_ID;
 import static com.example.sql_project.Students.TABLE_STUDENTS;
 
 public class ViewStudents extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -164,10 +166,39 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
 
     public void update(View view) {
 
+        if(pos<1){
+            Toast.makeText(this,"HAHAHA YOU FOOL YOU THOUGHT YOU CAN TRICK ME",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            ContentValues cv= new ContentValues();
+            db= hlp.getWritableDatabase();
+            db.delete(TABLE_STUDENTS, KEY_ID+"=?", new String[]{String.valueOf(pos)});
+
+            if(student.getText().toString().equals("") || s_Phone.getText().toString().equals(""))
+                Toast.makeText(this,"Name or Phone number are missing",Toast.LENGTH_SHORT).show();
+            else{
+                cv.put(Students.KEY_ID,pos);
+                cv.put(Students.NAME,student.getText().toString());
+                cv.put(Students.PHONE_NUMBER,Integer.parseInt(s_Phone.getText().toString()));
+                cv.put(Students.ADDRESS,address.getText().toString());
+                cv.put(Students.HOME_PHONE_NUMBER,Integer.parseInt(h_Phone.getText().toString()));
+                cv.put(Students.PARENT1_NAME,p1.getText().toString());
+                cv.put(Students.PARENT2_NAME,p2.getText().toString());
+                cv.put(Students.P1_NUM,Integer.parseInt(p1_Phone.getText().toString()));
+                cv.put(Students.P2_NUM,Integer.parseInt(p2_Phone.getText().toString()));
+                if(state.isChecked())
+                    cv.put(Students.ACTIVE,1);
+                else cv.put(Students.ACTIVE,0);
+                db.insert(Students.TABLE_STUDENTS, null, cv);
+
+                db.close();
+
+                names.set(pos-1,student.getText().toString());
+                adp.notifyDataSetChanged();
+            }
+        }
+
 
     }
 
-    public void delete(View view) {
-        state.setChecked(false);
-    }
 }

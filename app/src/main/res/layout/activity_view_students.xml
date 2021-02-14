@@ -183,13 +183,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="5" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10"
-                android:onClick="delete"
-                android:text="delete student" />
-
         </LinearLayout>
 
         <Space
