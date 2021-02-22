@@ -24,12 +24,11 @@ public class SortStudents extends AppCompatActivity implements AdapterView.OnIte
     HelperDB hlp;
     Cursor crsr;
 
-    Spinner filter1, filter2;
+    Spinner filter1,filter2;
     TextView viewInfo;
-    ArrayAdapter<String> adp1, adp2;
+    ArrayAdapter<String> adp1,adp2;
     ArrayList<String> names = new ArrayList<>();
     ArrayList<String> classes = new ArrayList<>();
-    ArrayList<String> fillIn = new ArrayList<>();
     String[] arrFilter = {"filter", "All the grades of one student", "grades in one subject", "all students grades in one subject /up"};
     String nameLoc;
     int row;

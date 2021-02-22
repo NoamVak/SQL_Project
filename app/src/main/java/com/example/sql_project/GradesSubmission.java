@@ -26,12 +26,12 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
     HelperDB hlp;
     Cursor crsr;
 
-    Spinner quart,nameId;
+    Spinner quart, nameId;
     ArrayList<String> names = new ArrayList<>();
     EditText classN,gradeN;
     ArrayAdapter<String> adp1,adp2;
     String [] qArray={"","1","2","3","4"};
-    int s_row,q_row,grade;
+    int s_row,q_row, grade;
     String className;
 
     @Override
@@ -123,6 +123,11 @@ public class GradesSubmission extends AppCompatActivity implements AdapterView.O
 
     }
 
+    /**
+     * Submit. - Insertion of student's grades into the database
+     *
+     * @param view the view
+     */
     public void Submit(View view) {
         if(classN.getText().toString().equals("") || gradeN.getText().toString().equals("") || q_row==0){
             Toast.makeText(this,"fill the missing areas",Toast.LENGTH_SHORT).show();

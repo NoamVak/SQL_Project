@@ -12,10 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     HelperDB hlp;
-    EditText student,s_Phone,address,h_Phone,p1,p1_Phone,p2,p2_Phone;
+    EditText student,s_Phone,address, h_Phone,p1,p1_Phone,p2, p2_Phone;
     int active=1;
 
     @Override
@@ -68,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Submit. - Student info insertion into the database
+     *
+     * @param view the view
+     */
     public void Submit(View view) {
         if(student.getText().toString().equals("") || s_Phone.getText().toString().equals("")|| p1_Phone.getText().toString().equals("")|| address.getText().toString().equals(""))
             Toast.makeText(this,"Name or Phone number are missing",Toast.LENGTH_SHORT).show();

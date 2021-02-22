@@ -30,10 +30,10 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
 
     ArrayAdapter<String> adp;
     ArrayList<String> names = new ArrayList<>();
-    String name,addr,p1_name,p2_name;
-    int pos,phone,h_phoneNum,p1_num,p2_num,active;
+    String name, addr, p1_name,p2_name;
+    int pos,phone,h_phoneNum,p1_num, p2_num, active;
     ListView stuView;
-    EditText student,s_Phone,address,h_Phone,p1,p1_Phone,p2,p2_Phone;
+    EditText student,s_Phone,address,h_Phone,p1, p1_Phone, p2,p2_Phone;
     ToggleButton state;
 
 
@@ -164,6 +164,11 @@ public class ViewStudents extends AppCompatActivity implements AdapterView.OnIte
         else state.setChecked(false);
     }
 
+    /**
+     * Update. - Updates student's info that's in the database
+     *
+     * @param view the view
+     */
     public void update(View view) {
 
         if(pos<1){
